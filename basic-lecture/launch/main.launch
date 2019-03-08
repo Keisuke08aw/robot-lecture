@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="model" default="$(find robot-car)/urdf/arc_rob.urdf"/>
+  <arg name="gui" default="true" />
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+  <arg name="rvizconfig" default="$(find robot-car)/config/SETTING.rviz" />
+  <arg name="vive" default="false"/>
+
+  <node name="move_driver" pkg="robot-car" type="move_driver">
+    <remap from="servo0" to="pif/FL/servo1"/>
+    <remap from="servo1" to="pif/FR/servo1"/>
+    <remap from="servo2" to="pif/BL/servo1"/>
+    <remap from="servo3" to="pif/BR/servo1"/>
+    <remap from="servo4" to="pif/BL/servo2"/>
+    <remap from="servo5" to="pif/BR/servo2"/>
+    <remap from="motor0" to="pif/FL/motor"/>
+    <remap from="motor1" to="pif/FR/motor"/>
+    <remap from="motor2" to="pif/BL/motor"/>
+    <remap from="motor3" to="pif/BR/motor"/>
+  </node>
+
+  <node name="move_simulator" pkg="robot-car" type="move_simulator">
+    <remap from="steer0" to="pif/FL/servo1"/>
+    <remap from="steer1" to="pif/FR/servo1"/>
+    <remap from="steer2" to="pif/BL/servo1"/>
+    <remap from="steer3" to="pif/BR/servo1"/>
+    <remap from="steer4" to="pif/BL/servo2"/>
+    <remap from="steer5" to="pif/BR/servo2"/>
+    <remap from="motor0" to="pif/FL/motor"/>
+    <remap from="motor1" to="pif/FR/motor"/>
+    <remap from="motor2" to="pif/BL/motor"/>
+    <remap from="motor3" to="pif/BR/motor"/>
+  </node>
+
+  
+
+  <node name="rob_states" pkg="robot-car" type="rob_states">
+    <remap from="steer0" to="pif/FL/servo1"/>
+    <remap from="steer1" to="pif/FR/servo1"/>
+    <remap from="steer2" to="pif/BL/servo1"/>
+    <remap from="steer3" to="pif/BR/servo1"/>
+    <remap from="motor0" to="pif/FL/motor"/>
+    <remap from="motor1" to="pif/FR/motor"/>
+    <remap from="motor2" to="pif/BL/motor"/>
+    <remap from="motor3" to="pif/BR/motor"/>
+    <remap from="tube0" to="pif/BL/servo2"/>
+    <remap from="tube1" to="pif/BR/servo2"/>
+  </node>
+
+
+
+  <node name="tf_robot_car_listen" pkg="robot-car" type="tf_robot_car_listen" />
+
+
+  <node name="control_robot" pkg="robot-car" type="control_robot.py" output="screen"/>
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+
+</launch>
