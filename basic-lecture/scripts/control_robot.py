@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(
 # import getMoveCurve
 # import getWayPoints
 
-move_speed = 0.30
+move_speed = 0.50
 
 world_rob_x = None
 world_rob_y = None
@@ -50,17 +50,7 @@ rate = rospy.Rate(100)
 
 
 while not rospy.is_shutdown():
-    # if world_rob_x is not None and world_rob_y is not None and world_rob_theta is not None and world_target_x is not None and world_target_y is not None:
     if world_rob_x is not None and world_rob_y is not None and world_rob_theta is not None:
-    
-        # move_curve = getMoveCurve.cal(
-        #     world_rob_x=world_rob_x,
-        #     world_rob_y=world_rob_y,
-        #     world_rob_theta=world_rob_theta,
-        #     world_target_x=world_target_x,
-        #     world_target_y=world_target_y
-        # )
         pub_curve.publish(1.0 / 0.30)
         pub_speed.publish(move_speed)
-
     rate.sleep()

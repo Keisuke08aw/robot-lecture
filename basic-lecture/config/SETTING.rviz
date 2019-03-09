@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /TFTrajectory1
       Splitter Ratio: 0.527777791
     Tree Height: 565
   - Class: rviz/Selection
@@ -147,6 +148,14 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: jsk_rviz_plugin/TFTrajectory
+      Enabled: true
+      Name: TFTrajectory
+      Value: true
+      color: 25; 255; 240
+      duration: 100
+      frame: slider0_link
+      line_width: 0.00999999978
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -172,25 +181,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.27731943
+      Distance: 3.80086279
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.129218623
+        Y: 0.447834879
+        Z: 0.00120042427
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.785398006
+      Pitch: 1.56979632
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.785398006
+      Yaw: 6.253582
     Saved: ~
 Window Geometry:
   Displays:

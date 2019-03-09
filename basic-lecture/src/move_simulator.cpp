@@ -9,25 +9,6 @@
 #include <sstream>
 #include <string>
 
-#define PS3_Button_Max 17
-#define PS3_Select 0
-#define PS3_L3 1
-#define PS3_R3 2
-#define PS3_Start 3
-#define PS3_Up 4
-#define PS3_Right 5
-#define PS3_Down 6
-#define PS3_Left 7
-#define PS3_L2 8
-#define PS3_R2 9
-#define PS3_L1 10
-#define PS3_R1 11
-#define PS3_triangle 12
-#define PS3_circle 13
-#define PS3_cross 14
-#define PS3_square 15
-#define PS3_PS 16
-
 float target_width[2] = {0.13, 0.13};
 float WHEEL_BASE = 0.26;
 float target_steer[4] = {0, 0, 0, 0};
@@ -95,7 +76,7 @@ void move_robot(float dt)
 
     float acc_x = 0;
     float acc_y = 0;
-    float str_z = 0;
+    float yaw_rate = 0;
 
     for (int i = 0; i < 4; i++)
     {
@@ -103,11 +84,12 @@ void move_robot(float dt)
         acc_y += target_motor[i] * sin(target_steer[i]);
     }
     float sum_r = target_steer[0] + target_steer[1] - target_steer[2] - target_steer[3];
-    str_z = acc_x * sin(sum_r / 4) / 3.1415 / WHEEL_BASE;
+    // yaw_rate = acc_x * sin(sum_r / 4) / 3.1415 / WHEEL_BASE;
+    yaw_rate = acc_x * sin(sum_r / 4) / 3.1415 / WHEEL_BASE;
 
     pos_x += (acc_x * cos(rot_z) - acc_y * sin(rot_z)) / 4 * dt;
     pos_y += (acc_y * cos(rot_z) + acc_x * sin(rot_z)) / 4 * dt;
-    rot_z += str_z * dt;
+    rot_z += yaw_rate * dt;
 
     float pos_xyz[3] = {0, 0, 0};
     float pos_rpy[3] = {0, 0, 0};
